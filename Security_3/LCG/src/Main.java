@@ -30,7 +30,6 @@ public class Main {
         long n = lcg.next(numbers[2],lcg.a,lcg.c);
        System.out.println("Predicted next number = " + n);
         makeBet(10,n);
-
     }
 
 

@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class SalsaMain {
     
     public static void main(String[] args) throws IOException {
-        List<String> lines = readFromFile("src/Text");
+        List<String> lines = readFromFile("Security_2/src/Text");
         Decryptor d = new Decryptor();
 
         d.decode(lines);
@@ -39,9 +39,9 @@ public class SalsaMain {
                 String line = scanner.nextLine();
                 System.out.println("Enter line index: ");
                 int ind = scanner.nextInt();
-                String keyHex = d.XORHexString(d.ASCIIToHex(line), d.ASCIIToHex(lines.get(ind)));
-                for (int i = 0; i < line.length(); i++) {
-                    System.out.println(d.hexToAscii(d.XORHexString(keyHex.substring(0,lines.get(i).length()*2),d.ASCIIToHex(lines.get(i)))));
+                String keyHex = d.XORHexString(d.ASCIIToHex(line), lines.get(ind));
+                for (int i = 0; i < lines.size(); i++) {
+                    System.out.println(d.hexToAscii(d.XORHexString(keyHex.substring(0,lines.get(i).length()),lines.get(i))));
                 }
             }
         //}
