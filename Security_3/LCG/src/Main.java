@@ -1,35 +1,35 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Properties;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 public class Main {
 
-    public static int ID = 3019;
+    public static int ID = 4050;
 
     public static void main(String[] args) throws IOException {
 
         //createAccount();
-        long[] numbers = new long[3];
-        numbers[0] =makeBet(1,1);
-        numbers[1] = makeBet(1,1);
-        numbers[2] = makeBet(1,1);
+        BigInteger[] numbers = new BigInteger[3];
+        numbers[0] =BigInteger.valueOf(makeBet(1,1));
+        numbers[1] = BigInteger.valueOf(makeBet(1,1));
+        numbers[2] = BigInteger.valueOf(makeBet(1,1));
         System.out.println(numbers[0]);
         System.out.println(numbers[1]);
         System.out.println(numbers[2]);
 
         Lcg lcg = new Lcg();
-        lcg.findValues(numbers);
+        lcg.findModulus(numbers);
         System.out.println("a = " + lcg.a);
         System.out.println("c = " + lcg.c);
-        long n = lcg.next(numbers[2],lcg.a,lcg.c);
-       System.out.println("Predicted next number = " + n);
-        makeBet(10,n);
+        BigInteger n = lcg.next(numbers[2],lcg.a,lcg.c);
+       System.out.println("Predicted next number = " + n.intValue());
+        makeBet(100,n.intValue());
     }
 
 

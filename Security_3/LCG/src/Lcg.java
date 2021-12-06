@@ -1,6 +1,26 @@
+import java.math.BigInteger;
+
 public class Lcg {
 
-    public long a;
+    public BigInteger a;
+    public BigInteger c;
+    public BigInteger modulus = BigInteger.valueOf((long)Math.pow(2,32));
+
+    public void findModulus(BigInteger[] numbers){
+        BigInteger diff1 = numbers[2].subtract(numbers[1]);
+        BigInteger diff2 = numbers[1].subtract(numbers[0]);
+        BigInteger inverse = diff2.modInverse(modulus);
+        a = diff1.multiply(inverse).mod(modulus);
+        //c = Math.floorMod(numbers[1] - a * numbers[0], modulus);
+        c = numbers[1].subtract(numbers[0].multiply(a)).mod(modulus);
+    }
+
+    public BigInteger next(BigInteger last, BigInteger a, BigInteger c){
+        last = (a.multiply(last).add(c)).mod(modulus);
+        return last;
+    }
+
+/*    public long a;
     public long c;
     public long modulus = (long) Math.pow(2, 32);
 
@@ -14,7 +34,7 @@ public class Lcg {
         return last;
     }
 
-    private static long modularInverse(long number, long modulus) {
+    public static long modularInverse(long number, long modulus) {
         long[] retvals;
         retvals = xgcd(number, modulus);
 
@@ -50,5 +70,5 @@ public class Lcg {
             }
             ;
         }
-    }
+    }*/
 }
